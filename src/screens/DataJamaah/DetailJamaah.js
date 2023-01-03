@@ -6,6 +6,15 @@ import Icon, { Icons } from '../../components/Icons'
 const {tinggi, panjang}   = Dimensions.get('window');
 
 export class DetailJamaah extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      hideDataDiri: true,
+      hideUmroh: true,
+      hideTabungan: true,
+    }
+  }
+
   render() {
     return (
       <SafeAreaView style={{flex: 1}}>
@@ -25,7 +34,9 @@ export class DetailJamaah extends Component {
             </View>
 
             {/* Data diri */}
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              this.state.hideDataDiri ? this.setState({hideDataDiri: false}) : this.setState({hideDataDiri: true})}
+            }>
               <View style={styles.viewDataDiri}>
                 <Icons.IcDataDiri width={30} height={30} />
                 <View style={{flex: 1, marginLeft: 15}}>
@@ -36,8 +47,29 @@ export class DetailJamaah extends Component {
               </View>
             </TouchableOpacity>
 
+            {/* Isi Data Diri */}
+            {
+              this.state.hideDataDiri === false ? (
+                <View style={styles.isiDataDiri}>
+                  <Text style={styles.txtTitle}>Nama</Text>
+                  <Text style={styles.txtValue}>Fulan</Text>
+                  <Text style={styles.txtTitle}>Jenis Kelamin</Text>
+                  <Text style={styles.txtValue}>Perempuan</Text>
+                  <Text style={styles.txtTitle}>Email</Text>
+                  <Text style={styles.txtValue}>fulan@gmail.com</Text>
+                  <Text style={styles.txtTitle}>Nomor Telepon</Text>
+                  <Text style={styles.txtValue}>081234123456</Text>
+                  <Text style={styles.txtTitle}>Alamat</Text>
+                  <Text style={styles.txtValue}>Permata Pamulang, Bhakti Jaya, Tangerang Selatan</Text>
+                </View>
+              ) : null
+            }
+
+
             {/* Data Umroh */}
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              this.state.hideUmroh ? this.setState({hideUmroh: false}) : this.setState({hideUmroh: true})}
+            }>
               <View style={styles.viewDataDiri}>
                 <Icons.IcDataUmroh width={30} height={30} />
                 <View style={{flex: 1, marginLeft: 15}}>
@@ -48,8 +80,29 @@ export class DetailJamaah extends Component {
               </View>
             </TouchableOpacity>
 
+            {/* Isi Umroh */}
+            {
+              this.state.hideUmroh === false ? (
+                <View style={styles.isiDataDiri}>
+                  <Text style={styles.txtTitle}>Surat Rekomendasi</Text>
+                  <TouchableOpacity
+                    style={{backgroundColor: '#29D88D', marginVertical: 20, borderRadius: 10, height: 50, justifyContent: 'center', alignItems: 'center', alignContent: 'center', flex: 1}}
+                    onPress={() => {}}
+                  >
+                    <Text style={{color: '#FFFFFF', fontWeight: '700', fontSize: 15}}>Surat telah dikirim</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.txtTitle}>Foto Pasport</Text>
+                  <Image source={Icons.ImgPasport}style={styles.imgFoto} resizeMode= 'cover'></Image>
+                  <Text style={styles.txtTitle}>Foto Sertifikat Vaksin Meningitis</Text>
+                  <Image source={Icons.ImgVaksin} style={styles.imgFoto} resizeMode= 'cover'></Image>
+                </View>
+              ) : null
+            }
+            
             {/* Data tabungan */}
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              this.state.hideTabungan ? this.setState({hideTabungan: false}) : this.setState({hideTabungan: true})}
+            }>
               <View style={styles.viewDataDiri}>
                 <Icons.IcDataTabungan width={30} height={30} />
                 <View style={{flex: 1, marginLeft: 15}}>
@@ -59,10 +112,22 @@ export class DetailJamaah extends Component {
                 <Icons.IcDown width={18} height={18}  />
               </View>
             </TouchableOpacity>
+
+            {/* Isi Tabungan */}            
+            {
+              this.state.hideTabungan === false ? (
+                <View style={styles.isiDataDiri}>
+                  <Text style={styles.txtTitle}>Tabungan</Text>
+                  <Text style={styles.txtValue}>Rp 0</Text>
+                  <Text style={styles.txtTitle}>Target Tabungan</Text>
+                  <Text style={styles.txtValue}>Rp 24.000.000</Text>
+                </View>
+              ) : null
+            }
             
             {/* button */}
             <TouchableOpacity
-              style={[styles.buttonModal, {backgroundColor: '#FD9812'}]}
+              style={[styles.buttonModal, {backgroundColor: '#FD9812', marginBottom: 30}]}
               onPress={() => {}}
             >
               <Text style={{color: '#FFFFFF', fontWeight: '700', fontSize: 15}}>SELESAIKAN PEMBAYARAN</Text>
@@ -136,7 +201,14 @@ const styles = StyleSheet.create({
       paddingVertical: 10,
       paddingStart: 10,
       paddingEnd: 20,
-      marginBottom: 15
+      marginTop: 15
+    },
+
+    isiDataDiri: {
+      marginHorizontal: 30,
+      flexDirection: 'column',
+      padding: 10,
+      marginBottom: 15,
     },
 
     buttonModal: {
@@ -147,6 +219,27 @@ const styles = StyleSheet.create({
       marginTop: 20,
       marginHorizontal: 30
     },
+
+    txtTitle: {
+      color: '#201f1f',
+      fontWeight: '600',
+      fontSize: 16,
+    },
+
+    txtValue: {
+      color: '#201f1f',
+      fontWeight: '400',
+      fontSize: 14,
+      marginBottom: 10
+    },
+
+    imgFoto: {
+      width: panjang,
+      height: 200,
+      marginVertical: 10,
+      borderRadius: 10
+    }
+
 })
 
 export default DetailJamaah

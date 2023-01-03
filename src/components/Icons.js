@@ -35,6 +35,8 @@ import IcDataDiri from '../assets/images/ic_data_diri.svg';
 import IcDataUmroh from '../assets/images/ic_data_umroh.svg';
 import IcDataTabungan from '../assets/images/ic_data_tabungan.svg';
 import IcDown from '../assets/images/ic_down.svg';
+import ImgPasport from '../assets/images/img_foto_pasport.png';
+import ImgVaksin from '../assets/images/img_foto_vaksin.png';
 
 
 export const Icons = {
@@ -73,7 +75,9 @@ export const Icons = {
     IcDataDiri, 
     IcDataTabungan, 
     IcDataUmroh,
-    IcDown
+    IcDown,
+    ImgPasport,
+    ImgVaksin
 }
 
 const Icon = ({ type, name, color, size = 24, style }) => {
